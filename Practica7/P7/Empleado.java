@@ -10,9 +10,18 @@ public class Empleado {
     private double salario;
 
     /**
-     * Método constructor de la clase Empleado
+     * Método constructor de para construir clases Empleado
+     * @param nombre -> Atributo para el nombre del Empleado
+     * @param direccion -> Dirección del empleado
+     * @param nombreTrabajo -> Nombre del trabajo del empleado
+     * @param salario ->Salario del empleado
      */
-    public Empleado(){}
+    public Empleado(String nombre, String direccion, String nombreTrabajo, double salario){
+        setNombre(nombre);
+        setDireccion(direccion);
+        setNombreTrabajo(nombreTrabajo);
+        setSalario(salario);
+    }
 
     //SETTERS Y GETTERS
     /**
@@ -78,11 +87,38 @@ public class Empleado {
     //METODOS 
     //Calcular bonos, generar reportes de desempeño, manejo de proyectos
     // generar reportes y manejo de proyectos de pueden represemtar con cadenas
-    
 
+    /**
+     * Método que aumenta el salario un porcentaje 
+     */
+    public void calcularBonos(){
+        //aumentar porcentaje de salario
+        setSalario(getSalario() * 1.10);
+    }
 
+    /**
+     * Método que reporta el desempeño del empleado
+     * @return -> Desempeño del empleado
+     */
+    public String reporteDesempeño(){
+        return "Reporte Desempeño";
+    }
 
+    /**
+     * Método que indica el proyecto que se está realizando
+     * @return -> Datos del proyecto actual
+     */
+    public String manejoProyectos(){
+        return "Manejo Proyectos";
+    }
 
-
+    @Override
+    public String toString(){
+        return "\nNombre: "+getNombre()+
+                "\nPuesto: "+getNombreTrabajo()+
+                "\nDirección: "+ getDireccion()+
+                "\nSalario: "+ getSalario()
+                +"\n";
+    }
     
 }
