@@ -47,7 +47,6 @@ public class Empleado{
         return rol;
     }
 
-
     /**
      * Método que calcula el salario del empleado
      * @return -> Salario del empleado
