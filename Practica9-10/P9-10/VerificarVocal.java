@@ -17,6 +17,8 @@ public class VerificarVocal {
     public void checarCadena(String cadena)throws VocalException{
         if(! cadena.matches(".*[aeiouAEIOU].*")){
             throw new VocalException("La cadena no contiene vocales");
+        }else{
+            System.out.println("La cadena contiene vocales");
         }
     }       
 }
