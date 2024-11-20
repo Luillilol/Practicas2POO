@@ -1,1 +1,1 @@
-# Practicas de Laboratiorio de Porgrmación Orientada a Objetos
+# Practicas de Laboratiorio de Programación Orientada a Objetos
