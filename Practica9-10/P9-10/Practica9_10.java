@@ -3,6 +3,8 @@ package mx.unam.fi.poo.g1.p9_10;
 import java.util.Scanner;
 import mx.unam.fi.poo.g1.p9_10.*;
 
+
+
 /**
  * Clase pricipal de la práctica 9-10
  * @author González Falcón Luis Adrián
@@ -24,4 +26,5 @@ public class Practica9_10 {
             System.out.println("Error: "+e.getMessage());
         }
     }
+    
 }
