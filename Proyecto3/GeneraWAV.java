@@ -24,11 +24,31 @@ public class GeneraWAV {
             fw.write("WAVE".getBytes());
             //cabecera fmt
             fw.write("fmt ".getBytes());
-            
+            fw.write(convertirEndiannessInt(16));
+            fw.write(convertirEndiannessShort((short)1));
+            fw.write(convertirEndiannessShort((short)canales)); //canales = 1
+            fw.write(convertirEndiannessInt(iFrecuenciaMuestreo));
+            fw.write(convertirEndiannessInt(bytesPs));
+            fw.write(convertirEndiannessShort((short)blockAlign));
+            fw.write(convertirEndiannessShort((short)bitsM));
+            //cabecera data
+            fw.write("data".getBytes());
+            fw.write(convertirEndiannessInt(dataSize));
+            //datos
 
+            //se necesita iterar n veces
+            //siendo n el número de muestras que se van a tomar a lo largo del muestreo
+            int totalMuestreo = iFrecuenciaMuestreo * iTiempo;
+            double t = 0;
+            short amplitud =0;
+            for (int i =0 ;  i<totalMuestreo; i++){
+                //calcular amplitud de la onde en el instante de tiempo t = i/frecuenciaMuestreo
+                t = (double) i  / iFrecuenciaMuestreo;
+                //se calcula la amplitud de la onda en el instante de tiempo t en tipo de dato short para los 16 bits que mide cada bloque
+                amplitud = (short) (Math.sin(2 * Math.PI * iArmonico * t) * Short.MAX_VALUE);
 
-
-
+                fw.write(convertirEndiannessShort(amplitud));
+            }
         } catch (IOException e) {
             System.out.println("Error al crear el archivo");
         }
