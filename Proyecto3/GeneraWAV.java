@@ -1,20 +1,19 @@
-import java.io.FileWriter;
 import java.io.FileOutputStream;
-import java.io.BufferedReader;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class GeneraWAV {
     public void escribe(String nombre, int iTiempo, int iFrecuenciaMuestreo, int iArmonico) {
         try {
+            if (!nombre.contains(".wav")){
+                throw new IllegalArgumentException("El archivo debe de ser de extensión .wav");
+            }
             FileOutputStream fw = new FileOutputStream(nombre ); //para escribir en bytes en el archivo .wav
             //variables auxiliares
             int bitsM = 16; //bits por muestra
             int bytesM = bitsM / 8; //bytes por muestra
             int canales = 1; //número de canales
-            int blockAlign = canales * bytesM; //tamaño de bloque
-            int bytesPs = iFrecuenciaMuestreo * blockAlign; //bytes por segundo
+            int tamBloque = canales * bytesM; //tamaño de bloque
+            int bytesPs = iFrecuenciaMuestreo * tamBloque; //bytes por segundo
             int dataSize = iFrecuenciaMuestreo * bytesM * iTiempo; //tamaño de la data
             int totalData = 36 + dataSize; //tamaño total del archivo
 
@@ -29,7 +28,7 @@ public class GeneraWAV {
             fw.write(convertirEndiannessShort((short)canales)); //canales = 1
             fw.write(convertirEndiannessInt(iFrecuenciaMuestreo));
             fw.write(convertirEndiannessInt(bytesPs));
-            fw.write(convertirEndiannessShort((short)blockAlign));
+            fw.write(convertirEndiannessShort((short)tamBloque));
             fw.write(convertirEndiannessShort((short)bitsM));
             //cabecera data
             fw.write("data".getBytes());
@@ -46,15 +45,11 @@ public class GeneraWAV {
                 t = (double) i  / iFrecuenciaMuestreo;
                 //se calcula la amplitud de la onda en el instante de tiempo t en tipo de dato short para los 16 bits que mide cada bloque
                 amplitud = (short) (Math.sin(2 * Math.PI * iArmonico * t) * Short.MAX_VALUE);
-
                 fw.write(convertirEndiannessShort(amplitud));
             }
         } catch (IOException e) {
             System.out.println("Error al crear el archivo");
         }
-
-
-
     }
 
     //Métodos auxiliares littleEndian y bigEndian

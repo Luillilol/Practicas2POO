@@ -34,15 +34,15 @@ public class Proyecto3 {
             //Objeto generarWAV
             GeneraWAV creador= new GeneraWAV();
             creador.escribe(nombre, tiempo, frecuenciaMuestreo, numMuestras);
-            
 
+            //caso cuando no es extension.wav
         } catch (FileNotFoundException e) {
-            
+            System.out.println("No se encontró el archivo");
         }catch (IOException e) {
-            
+            System.out.println("Error al leer el archivo");
         }
         catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error: "+e.getMessage());
         }
         
     }
